@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist - Seleção de Mês/Ano</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .wrapper, .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1000px;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        label {
+            font-size: 1em;
+        }
+
+        select {
+            font-size: 1em;
+            padding: 5px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            width: 100%;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 150px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .container {
+            display: none;
+        }
+
+        .checklist-column {
+            display: grid;
+            grid-template-columns: 1fr 1px 1fr; /* 1fr, linha vertical e 1fr */
+            gap: 20px;
+            width: 100%;
+        }
+
+        .checklist-column > div:nth-child(2) {
+            background-color: #ddd; /* Cor da linha vertical */
+            width: 1px; /* Largura da linha */
+            height: 100%;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd; /* Linha horizontal para separar */
+        }
+
+        .checklist-grid label {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .checklist-grid input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .status {
+            font-weight: bold;
+            font-size: 1em;
+            text-align: right;
+        }
+
+        .done {
+            color: #4CAF50; /* Verde para feito */
+        }
+
+        .not-done {
+            color: #FF5722; /* Vermelho para não feito */
+        }
+
+        #back-button {
+            background-color: #f44336;
+            width: 100%;
+            max-width: 150px;
+            margin-top: 20px;
+        }
+
+        #back-button:hover {
+            background-color: #d32f2f;
+        }
+
+        @media (max-width: 768px) {
+            .checklist-column {
+                grid-template-columns: 1fr; /* Uma coluna em telas menores */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper" id="initial-screen">
+        <h1>Selecione o Mês e Ano</h1>
+        <label for="month">Mês:</label>
+        <select id="month">
+            <option value="01">Janeiro</option>
+            <option value="02">Fevereiro</option>
+            <option value="03">Março</option>
+            <option value="04">Abril</option>
+            <option value="05">Maio</option>
+            <option value="06">Junho</option>
+            <option value="07">Julho</option>
+            <option value="08">Agosto</option>
+            <option value="09">Setembro</option>
+            <option value="10">Outubro</option>
+            <option value="11">Novembro</option>
+            <option value="12">Dezembro</option>
+        </select>
+        
+        <label for="year">Ano:</label>
+        <select id="year">
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+        </select>
+
+        <button onclick="startChecklist()">Abrir Checklist</button>
+    </div>
+
+    <div class="container" id="checklist-screen">
+        <h1>Checklist</h1>
+        <div class="checklist-column" id="checklist">
+            <div>
+                <div class="checklist-grid">
+                    <label for="prefeitura">PREFEITURA</label>
+                    <input type="checkbox" id="prefeitura" onclick="updateStatus()">
+                    <span id="status-prefeitura" class="status">Não Feito</span>
+                </div>
+                <div class="checklist-grid">
+                    <label for="arquivo">ARQUIVO</label>
+                    <input type="checkbox" id="arquivo" onclick="updateStatus()">
+                    <span id="status-arquivo" class="status">Não Feito</span>
+                </div>
+                <div class="checklist-grid">
+                    <label for="obras">OBRAS</label>
+                    <input type="checkbox" id="obras" onclick="updateStatus()">
+                    <span id="status-obras" class="status">Não Feito</span>
+                </div>
+                <div class="checklist-grid">
+                    <label for="agricultura">AGRICULTURA</label>
+                    <input type="checkbox" id="agricultura" onclick="updateStatus()">
+                    <span id="status-agricultura" class="status">Não Feito</span>
+                </div>
+                <div class="checklist-grid">
+                    <label for="cultura">CULTURA</label>
+                    <input type="checkbox" id="cultura" onclick="updateStatus()">
+                    <span id="status-cultura" class="status">Não Feito</span>
+                </div>
+                <div class="checklist-grid">
+                    <label for="sec_educacao">SEC. DE EDUCAÇÃO</label>
+                    <input type="checkbox" id="sec_educacao" onclick="updateStatus()">
+                    <span id="status-sec_educacao" class="status">Não Feito</span>
+                </div>
+                <div class="checklist-grid">
+                    <label for="dae">DAE</label>
+                    <input type="checkbox" id="dae" onclick="updateStatus()">
+                    <span id="status-dae" class="status">Não Feito</span>
+                </div>
+                <div class="checklist-grid">
+                    <label for="tributos">TRIBUTOS</label>
+                    <input type="checkbox" id="tributos" onclick="updateStatus()">
+                    <span id="status-tributos" class="status">Não Feito</span>
+                </div>
+            </div>
+
+            <div></div> <!-- Coluna vazia para a linha de separação vertical -->
+
+            <div>
+                <div class="checklist-grid">
+                    <label for="saude">SAÚDE</label>
+                    <input type="checkbox" id="saude" onclick="updateStatus()">
+                    <span id="status-saude" class="status">Não Feito</span>
+                </div>
+                <div class="checklist-grid">
+                    <label for="conselho_tutelar">CONSELHO TUTELAR</label>
+                    <input type="checkbox" id="conselho_tutelar" onclick="updateStatus()">
+                    <span id="status-conselho_tutelar" class="status">Não Feito</span>
+                </div>
+                <div class="checklist-grid">
+                    <label for="assistencia_social">ASSISTÊNCIA SOCIAL</label>
+                    <input type="checkbox" id="assistencia_social" onclick="updateStatus()">
+                    <span id="status-assistencia_social" class="status">Não Feito</span>
+                </div>
+                <div class="checklist-grid">
+                    <label for="escola_julio_muller">ESCOLA JULIO MULLER</label>
+                    <input type="checkbox" id="escola_julio_muller" onclick="updateStatus()">
+                    <span id="status-escola_julio_muller" class="status">Não Feito</span>
+                </div>
+                <div class="checklist-grid">
+                    <label for="escola_rosa_maria">ESCOLA CME ROSA MARIA CURSINO</label>
+                    <input type="checkbox" id="escola_rosa_maria" onclick="updateStatus()">
+                    <span id="status-escola_rosa_maria" class="status">Não Feito</span>
+                </div>
+                <div class="checklist-grid">
+                    <label for="escola_jose_altamiro">ESCOLA JOSÉ ALTAMIRO PAIM</label>
+                    <input type="checkbox" id="escola_jose_altamiro" onclick="updateStatus()">
+                    <span id="status-escola_jose_altamiro" class="status">Não Feito</span>
+                </div>
+                <div class="checklist-grid">
+                    <label for="escola_anexa_jose_altamiro">ESCOLA ANEXA JOSÉ ALTAMIRO PAIM</label>
+                    <input type="checkbox" id="escola_anexa_jose_altamiro" onclick="updateStatus()">
+                    <span id="status-escola_anexa_jose_altamiro" class="status">Não Feito</span>
+                </div>
+                <div class="checklist-grid">
+                    <label for="qg">QG</label>
+                    <input type="checkbox" id="qg" onclick="updateStatus()">
+                    <span id="status-qg" class="status">Não Feito</span>
+                </div>
+            </div>
+        </div>
+
+        <button id="back-button" onclick="goBack()">Voltar</button>
+    </div>
+
+    <script>
+        function startChecklist() {
+            const month = document.getElementById('month').value;
+            const year = document.getElementById('year').value;
+
+            document.getElementById('initial-screen').style.display = 'none';
+            document.getElementById('checklist-screen').style.display = 'block';
+            
+            loadStatus(month, year);
+        }
+
+        function goBack() {
+            document.getElementById('checklist-screen').style.display = 'none';
+            document.getElementById('initial-screen').style.display = 'block';
+        }
+
+        function updateStatus() {
+            const month = document.getElementById('month').value;
+            const year = document.getElementById('year').value;
+
+            const items = [
+                'prefeitura', 'arquivo', 'obras', 'agricultura', 'cultura', 'sec_educacao', 'dae', 'tributos',
+                'saude', 'conselho_tutelar', 'assistencia_social', 'escola_julio_muller', 'escola_rosa_maria',
+                'escola_jose_altamiro', 'escola_anexa_jose_altamiro', 'qg'
+            ];
+
+            items.forEach(id => {
+                const checkbox = document.getElementById(id);
+                const statusElement = document.getElementById(`status-${id}`);
+                const checked = checkbox.checked;
+
+                statusElement.textContent = checked ? 'Feito' : 'Não Feito';
+                statusElement.className = checked ? 'status done' : 'status not-done';
+
+                localStorage.setItem(`${year}-${month}-${id}`, checked);
+            });
+        }
+
+        function loadStatus(month, year) {
+            const items = [
+                'prefeitura', 'arquivo', 'obras', 'agricultura', 'cultura', 'sec_educacao', 'dae', 'tributos',
+                'saude', 'conselho_tutelar', 'assistencia_social', 'escola_julio_muller', 'escola_rosa_maria',
+                'escola_jose_altamiro', 'escola_anexa_jose_altamiro', 'qg'
+            ];
+
+            items.forEach(id => {
+                const checkbox = document.getElementById(id);
+                const statusElement = document.getElementById(`status-${id}`);
+                const savedStatus = localStorage.getItem(`${year}-${month}-${id}`) === 'true';
+
+                checkbox.checked = savedStatus;
+                statusElement.textContent = savedStatus ? 'Feito' : 'Não Feito';
+                statusElement.className = savedStatus ? 'status done' : 'status not-done';
+            });
+        }
+    </script>
+
+</body>
+</html>

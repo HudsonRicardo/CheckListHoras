@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist de Itens</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="checkbox"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #aaa;
+            border-radius: 5px;
+            margin-right: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+        }
+
+        input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 5px;
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        label {
+            cursor: pointer;
+            font-size: 1em;
+            color: #555;
+        }
+
+        label:hover {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Checklist</h1>
+        <ul>
+            <li><input type="checkbox" id="prefeitura"><label for="prefeitura">PREFEITURA</label></li>
+            <li><input type="checkbox" id="arquivo"><label for="arquivo">ARQUIVO</label></li>
+            <li><input type="checkbox" id="obras"><label for="obras">OBRAS</label></li>
+            <li><input type="checkbox" id="agricultura"><label for="agricultura">AGRICULTURA</label></li>
+            <li><input type="checkbox" id="cultura"><label for="cultura">CULTURA</label></li>
+            <li><input type="checkbox" id="educacao"><label for="educacao">SEC. DE EDUCAÇÃO</label></li>
+            <li><input type="checkbox" id="dae"><label for="dae">DAE</label></li>
+            <li><input type="checkbox" id="tributos"><label for="tributos">TRIBUTOS</label></li>
+            <li><input type="checkbox" id="saude"><label for="saude">SAÚDE</label></li>
+            <li><input type="checkbox" id="conselhoTutelar"><label for="conselhoTutelar">CONSELHO TUTELAR</label></li>
+            <li><input type="checkbox" id="assistenciaSocial"><label for="assistenciaSocial">ASSISTÊNCIA SOCIAL</label></li>
+            <li><input type="checkbox" id="escolaJulioMuller"><label for="escolaJulioMuller">ESCOLA JULIO MULLER</label></li>
+            <li><input type="checkbox" id="escolaRosaMaria"><label for="escolaRosaMaria">ESCOLA CME ROSA MARIA CURSINO</label></li>
+            <li><input type="checkbox" id="escolaJoseAltamiro"><label for="escolaJoseAltamiro">ESCOLA JOSE ALTAMIRO PAIM</label></li>
+            <li><input type="checkbox" id="escolaAnexaJoseAltamiro"><label for="escolaAnexaJoseAltamiro">ESCOLA ANEXA JOSE ALTAMIRO PAIM</label></li>
+            <li><input type="checkbox" id="escolaJoseDiasCoutinho"><label for="escolaJoseDiasCoutinho">ESCOLA JOSÉ DIAS COUTINHO</label></li>
+            <li><input type="checkbox" id="escolaGuiomar"><label for="escolaGuiomar">ESCOLA GUIOMAR</label></li>
+            <li><input type="checkbox" id="escolaEpaminondas"><label for="escolaEpaminondas">ESCOLA EPAMINONDAS</label></li>
+            <li><input type="checkbox" id="escolaOdete"><label for="escolaOdete">ESCOLA ODETE</label></li>
+            <li><input type="checkbox" id="escolaLeilaNovaPox"><label for="escolaLeilaNovaPox">ESCOLA PROF. LEILA NOVA POX</label></li>
+            <li><input type="checkbox" id="qg"><label for="qg">QG</label></li>
+        </ul>
+    </div>
+</body>
+</html>
